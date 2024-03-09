@@ -1,0 +1,58 @@
+server:
+  port: 8765
+  error:
+    include-stacktrace: never
+
+spring:
+  config:
+    import:
+      - classpath:/keycloak.yml
+      - classpath:/springdoc.yml
+      - classpath:/management.yml
+      - classpath:/logging.yml
+      - classpath:/security.yml
+  application:
+    name: '@project.name@'
+  devtools:
+    restart:
+      enabled: false
+  security:
+    user:
+      name: admin
+      password: admin
+      roles: ${ROLES}
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${keycloak.issuer-uri}
+          jwk-set-uri: ${keycloak.jwk-set-uri}
+        opaquetoken:
+          introspection-uri: ${keycloak.introspection-uri}
+          client-id: ${keycloak.client.id}
+          client-secret: ${keycloak.client.secret}
+  cloud:
+    gateway:
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allow-credentials: true
+            allowed-origins: ${ORIGINS:http://localhost:${server.port},http://localhost:3000}
+            allowed-headers: '*'
+            allowed-methods: '*'
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        - id: orquestador
+          uri: http://localhost:8081
+          predicates:
+            - Path=/api/orquestador/**
+        - id: ms2
+          uri: http://localhost:8085
+          predicates:
+            - Path=/api/ms2/**
+
+logging:
+  level:
+    org.springframework.security.oauth2: DEBUG

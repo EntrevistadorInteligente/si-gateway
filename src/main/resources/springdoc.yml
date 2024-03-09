@@ -1,0 +1,11 @@
+springdoc:
+  show-actuator: true
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+    urls:
+      - url: /service.users/api/v3/api-docs
+        name: 'Accounts Service APIs'
+      - url: /service.notification/api/v3/api-docs
+        name: 'Notifications Service APIs'
