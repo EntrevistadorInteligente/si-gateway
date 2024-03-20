@@ -8,7 +8,7 @@ keycloak:
   client:
     name: backend
     id: backend
-    secret: ppkaPx18AzwiF9nKbmB3hykqCsTbrfwG
+    secret: cIcybPUOMYMb5jVyRwQFzhaoIednOC8j
     username: admin
     password: admin
   jwt-converter:

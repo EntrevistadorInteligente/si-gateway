@@ -48,7 +48,8 @@ public class SecurityConfiguration {
                                 "/error",
                                 "/sso/logout",
                                 "/logout",
-                                "/api/orquestador/v1/entrevistador/public/**"
+                                "/api/orquestador/v1/entrevistador/public/preguntas",
+                                "/api/orquestador/v1/entrevistador/preguntas/**"
                         )
                         .permitAll()
                         .anyExchange().authenticated()
