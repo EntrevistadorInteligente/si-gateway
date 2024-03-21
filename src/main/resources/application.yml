@@ -51,7 +51,11 @@ spring:
         - id: ms2
           uri: http://localhost:8085
           predicates:
-            - Path=/api/ms2/**
+            - Path=/orquestador-web-socket/**
+        - id: orquestador-web-socket
+          uri: ws://localhost:8081/canalWS
+          predicates:
+            - Path=/canalWS/**
 
 logging:
   level:

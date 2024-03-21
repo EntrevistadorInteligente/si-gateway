@@ -49,7 +49,8 @@ public class SecurityConfiguration {
                                 "/sso/logout",
                                 "/logout",
                                 "/api/orquestador/v1/entrevistador/public/preguntas",
-                                "/api/orquestador/v1/entrevistador/preguntas/**"
+                                "/api/orquestador/v1/entrevistador/cv/**",
+                                "/canalWS/**"
                         )
                         .permitAll()
                         .anyExchange().authenticated()
