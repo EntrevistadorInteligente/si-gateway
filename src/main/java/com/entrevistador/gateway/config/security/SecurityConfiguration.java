@@ -50,7 +50,8 @@ public class SecurityConfiguration {
                                 "/logout",
                                 "/api/orquestador/v1/entrevistador/public/preguntas",
                                 "/api/orquestador/v1/entrevistador/cv/**",
-                                "/canalWS/**"
+                                "/api/orquestador/ws**",
+                                "/api/orquestador/v1/eventos/subscribe"
                         )
                         .permitAll()
                         .anyExchange().authenticated()

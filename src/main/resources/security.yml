@@ -19,4 +19,5 @@ application:
       - /api/ms1/secret
       - /api/orquestador/v1/entrevistador/public/preguntas
       - /api/orquestador/v1/entrevistador/cv/**
-      - /canalWS/**
+      - /api/orquestador/ws**
+      - /api/orquestador/v1/eventos/subscribe
