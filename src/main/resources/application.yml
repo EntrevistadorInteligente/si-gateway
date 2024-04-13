@@ -48,10 +48,10 @@ spring:
           uri: http://localhost:8081
           predicates:
             - Path=/api/orquestador/**
-        - id: ms2
-          uri: http://localhost:8085
+        - id: feedback
+          uri: http://localhost:8082
           predicates:
-            - Path=/orquestador-web-socket/**
+            - Path=/api/administrador-entrevista/**
         - id: orquestador-web-socket
           uri: ws://localhost:8081/canalWS
           predicates:

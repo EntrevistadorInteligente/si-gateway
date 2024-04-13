@@ -51,7 +51,8 @@ public class SecurityConfiguration {
                                 "/api/orquestador/v1/entrevistador/public/preguntas",
                                 "/api/orquestador/v1/entrevistador/cv/**",
                                 "/api/orquestador/ws**",
-                                "/api/orquestador/v1/eventos/subscribe"
+                                "/api/orquestador/v1/eventos/subscribe",
+                                "/api/administrador-entrevista/v1/eventos/subscribe"
                         )
                         .permitAll()
                         .anyExchange().authenticated()
