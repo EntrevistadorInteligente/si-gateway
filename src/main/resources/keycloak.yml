@@ -1,9 +1,9 @@
 keycloak:
-  server-url: http://localhost:62098
-  issuer-uri: http://localhost:62098/realms/entrevistador
-  jwk-set-uri: http://localhost:62098/realms/entrevistador/protocol/openid-connect/certs
-  introspection-uri: http://localhost:62098/realms/entrevistador/protocol/openid-connect/token/introspect
-  token-uri: http://localhost:62098/realms/entrevistador/protocol/openid-connect/token
+  server-url: https://keycloak.pruebas-entrevistador-inteligente.site
+  issuer-uri: https://keycloak.pruebas-entrevistador-inteligente.site/realms/entrevistador
+  jwk-set-uri: https://keycloak.pruebas-entrevistador-inteligente.site/realms/entrevistador/protocol/openid-connect/certs
+  introspection-uri: https://keycloak.pruebas-entrevistador-inteligente.site/realms/entrevistador/protocol/openid-connect/token/introspect
+  token-uri: https://keycloak.pruebas-entrevistador-inteligente.site/realms/entrevistador/protocol/openid-connect/token
   realm: entrevistador
   client:
     name: backend

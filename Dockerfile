@@ -17,4 +17,4 @@ COPY target/gateway-0.0.1-SNAPSHOT.jar $APP_DIR/gateway.jar
 
 CMD ["java", "-XX:+UseContainerSupport", "-XX:MaxRAMPercentage=75", "-Duser.timezone=${TZ}", "-jar", "/home/gateway.jar"]
 
-EXPOSE 9090
+EXPOSE 8765

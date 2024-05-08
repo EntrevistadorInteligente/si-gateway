@@ -45,17 +45,14 @@ spring:
           lower-case-service-id: true
       routes:
         - id: orquestador
-          uri: http://localhost:8081
+          uri: http://orquestador:8081
           predicates:
             - Path=/api/orquestador/**
         - id: feedback
-          uri: http://localhost:8082
+          uri: http://generador-feedback:8082
           predicates:
             - Path=/api/administrador-entrevista/**
-        - id: orquestador-web-socket
-          uri: ws://localhost:8081/canalWS
-          predicates:
-            - Path=/canalWS/**
+
 
 logging:
   level:

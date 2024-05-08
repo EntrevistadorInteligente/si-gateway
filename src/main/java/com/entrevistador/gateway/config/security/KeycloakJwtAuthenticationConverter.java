@@ -1,6 +1,7 @@
 package com.entrevistador.gateway.config.security;
 
 import com.entrevistador.gateway.config.properties.KeycloakJwtConverterProperties;
+import jakarta.ws.rs.core.GenericType;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.convert.converter.Converter;
