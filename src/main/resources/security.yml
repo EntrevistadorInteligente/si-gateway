@@ -1,0 +1,22 @@
+application:
+  security:
+    white-list:
+      - /webjars/**
+      - /v3/api-docs/**
+      - /*/v3/api-docs/**
+      - /*/*/v3/api-docs/**
+      - /swagger-ui.html
+      - /swagger-ui/**
+      - /swagger-resources
+      - /swagger-resources/**
+      - /configuration/ui
+      - /configuration/security
+      - /actuator/**
+      - /*/actuator/**
+      - /error
+      - /sso/logout
+      - /logout
+      - /api/ms1/secret
+      - /api/orquestador/v1/entrevistador/public/**
+      - /api/notificaciones/v1/eventos/subscribe/**
+      - /api/administrador-entrevista/v1/muestra/**
