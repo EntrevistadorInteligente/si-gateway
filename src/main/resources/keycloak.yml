@@ -1,16 +1,16 @@
 keycloak:
-  server-url: https://keycloak.pruebas-entrevistador-inteligente.site
-  issuer-uri: https://keycloak.pruebas-entrevistador-inteligente.site/realms/entrevistador
-  jwk-set-uri: https://keycloak.pruebas-entrevistador-inteligente.site/realms/entrevistador/protocol/openid-connect/certs
-  introspection-uri: https://keycloak.pruebas-entrevistador-inteligente.site/realms/entrevistador/protocol/openid-connect/token/introspect
-  token-uri: https://keycloak.pruebas-entrevistador-inteligente.site/realms/entrevistador/protocol/openid-connect/token
+  server-url: ${URL_KEYCLOAK}
+  issuer-uri: ${URL_KEYCLOAK}/realms/entrevistador
+  jwk-set-uri: ${URL_KEYCLOAK}/realms/entrevistador/protocol/openid-connect/certs
+  introspection-uri: ${URL_KEYCLOAK}/realms/entrevistador/protocol/openid-connect/token/introspect
+  token-uri: ${URL_KEYCLOAK}/realms/entrevistador/protocol/openid-connect/token
   realm: entrevistador
   client:
     name: backend
     id: backend
-    secret: B6MA29IMfTzdlB1ouZQsQA2HYCEQjO3F
-    username: admin
-    password: admin
+    secret: ${KEYCLOAK_CLIENT_SECRET}
+    username: ${KEYCLOAK_CLIENT_USERNAME}
+    password: ${KEYCLOAK_CLIENT_PASSWORD}
   jwt-converter:
     role-claims: realm_access.roles,resource_access.account.roles
     username-attribute: preferred_username

@@ -45,15 +45,19 @@ spring:
           lower-case-service-id: true
       routes:
         - id: orquestador
-          uri: http://orquestador:8081
+          uri:  ${URL_ORQUESTADOR}
           predicates:
             - Path=/api/orquestador/**
         - id: feedback
-          uri: http://generador-feedback:8082
+          uri:  ${URL_FEEDBACK}
           predicates:
             - Path=/api/administrador-entrevista/**
-
+        - id: notificaciones
+          uri:  ${URL_WEBSOCKET}
+          predicates:
+            - Path=/api/notificaciones/**
 
 logging:
   level:
     org.springframework.security.oauth2: DEBUG
+

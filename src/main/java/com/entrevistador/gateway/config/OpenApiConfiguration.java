@@ -8,11 +8,11 @@ import io.swagger.v3.oas.annotations.servers.Server;
 @OpenAPIDefinition(
         info = @Info(
                 title = "API Gateway",
-                description = "JustedlevHub APIs documentation",
+                description = "EntrevistadorInteligente APIs documentation",
                 version = "1.0",
                 contact = @Contact(
-                        name = "JustedlevHub",
-                        email = "justedlevhub@gmail.com"
+                        name = "EntrevistadorInteligente",
+                        email = "entrevistadorinteligente@gmail.com"
                 )
         ),
         servers = {
@@ -24,7 +24,21 @@ import io.swagger.v3.oas.annotations.servers.Server;
                         url = "http://api-gateway:${server.port}",
                         description = "Docker ENV"
                 )
+                ,
+                @Server(
+                        url = "https://gateway.pruebas-entrevistador-inteligente.site",
+                        description = "Dev ENV"
+                )
+                ,
+                @Server(
+                        url = "https://gateway.pruebas-entrevistador-inteligente.site",
+                        description = "Prod ENV"
+                )
         }
 )
+
+
 public class OpenApiConfiguration {
 }
+
+
