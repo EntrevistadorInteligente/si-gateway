@@ -32,6 +32,9 @@ spring:
           client-secret: ${keycloak.client.secret}
   cloud:
     gateway:
+      httpclient:
+        connect-timeout: 3000
+        response-timeout: 3000
       globalcors:
         corsConfigurations:
           '[/**]':
@@ -45,18 +48,50 @@ spring:
           lower-case-service-id: true
       routes:
         - id: orquestador
-          uri:  ${URL_ORQUESTADOR}
+          uri: ${URL_ORQUESTADOR}
           predicates:
             - Path=/api/orquestador/**
+          filters:
+            - name: Retry
+              args:
+                retries: 3
+                statuses: BAD_GATEWAY, GATEWAY_TIMEOUT, INTERNAL_SERVER_ERROR
+                methods: GET, POST, PUT
+                backoff:
+                  firstBackoff: 10ms
+                  maxBackoff: 50ms
+                  factor: 2
+                  basedOnPreviousValue: false
         - id: feedback
-          uri:  ${URL_FEEDBACK}
+          uri: ${URL_FEEDBACK}
           predicates:
             - Path=/api/administrador-entrevista/**
+          filters:
+            - name: Retry
+              args:
+                retries: 3
+                statuses: BAD_GATEWAY, GATEWAY_TIMEOUT, INTERNAL_SERVER_ERROR
+                methods: GET, POST
+                backoff:
+                  firstBackoff: 10ms
+                  maxBackoff: 50ms
+                  factor: 2
+                  basedOnPreviousValue: false
         - id: notificaciones
-          uri:  ${URL_WEBSOCKET}
+          uri: ${URL_WEBSOCKET}
           predicates:
             - Path=/api/notificaciones/**
-
+          filters:
+            - name: Retry
+              args:
+                retries: 3
+                statuses: BAD_GATEWAY, GATEWAY_TIMEOUT, INTERNAL_SERVER_ERROR
+                methods: GET, POST
+                backoff:
+                  firstBackoff: 10ms
+                  maxBackoff: 50ms
+                  factor: 2
+                  basedOnPreviousValue: false
 logging:
   level:
     org.springframework.security.oauth2: DEBUG
