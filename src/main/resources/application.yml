@@ -55,7 +55,7 @@ spring:
             - name: Retry
               args:
                 retries: 3
-                statuses: BAD_GATEWAY, GATEWAY_TIMEOUT, INTERNAL_SERVER_ERROR
+                statuses: BAD_GATEWAY, GATEWAY_TIMEOUT
                 methods: GET, POST, PUT
                 backoff:
                   firstBackoff: 10ms
@@ -70,7 +70,7 @@ spring:
             - name: Retry
               args:
                 retries: 3
-                statuses: BAD_GATEWAY, GATEWAY_TIMEOUT, INTERNAL_SERVER_ERROR
+                statuses: BAD_GATEWAY, GATEWAY_TIMEOUT
                 methods: GET, POST
                 backoff:
                   firstBackoff: 10ms
@@ -85,7 +85,7 @@ spring:
             - name: Retry
               args:
                 retries: 3
-                statuses: BAD_GATEWAY, GATEWAY_TIMEOUT, INTERNAL_SERVER_ERROR
+                statuses: BAD_GATEWAY, GATEWAY_TIMEOUT
                 methods: GET, POST
                 backoff:
                   firstBackoff: 10ms
