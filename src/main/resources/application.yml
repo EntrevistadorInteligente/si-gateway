@@ -92,6 +92,21 @@ spring:
                   maxBackoff: 50ms
                   factor: 2
                   basedOnPreviousValue: false
+        - id: chats
+          uri: ${URL_CHAT_BOT}
+          predicates:
+            - Path=/api/chats/**
+          filters:
+            - name: Retry
+              args:
+                retries: 3
+                statuses: BAD_GATEWAY, GATEWAY_TIMEOUT
+                methods: GET, POST
+                backoff:
+                  firstBackoff: 10ms
+                  maxBackoff: 50ms
+                  factor: 2
+                  basedOnPreviousValue: false
 logging:
   level:
     org.springframework.security.oauth2: DEBUG
