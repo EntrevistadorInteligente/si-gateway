@@ -12,6 +12,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @SpringBootApplication
 @EnableDiscoveryClient
+@SuppressWarnings("java:S116")
 @EnableConfigurationProperties({
 		KeycloakProperties.class,
 		KeycloakClientProperties.class,
