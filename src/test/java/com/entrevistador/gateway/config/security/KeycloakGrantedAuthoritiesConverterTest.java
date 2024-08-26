@@ -57,4 +57,40 @@ class KeycloakGrantedAuthoritiesConverterTest {
 
         assertEquals(expectedAuthorities, actualAuthorities);
     }
+
+    @Test
+    void extractAuthority_ShouldHandleMissingIntermediateLevel() {
+        // Arrange
+        when(properties.getRoleClaims()).thenReturn(Set.of("missing.level"));
+
+        jwt = Jwt.withTokenValue("token")
+                .header("alg", "none")
+                .claim("missing", Map.of())  // No contiene "level"
+                .build();
+
+        // Act
+        Collection<GrantedAuthority> authorities = converter.convert(jwt);
+
+        // Assert
+        assertTrue(authorities.isEmpty());
+    }
+
+    @Test
+    void extractAuthority_ShouldHandlePathNotEndingInList() {
+        // Arrange
+        when(properties.getRoleClaims()).thenReturn(Set.of("realm_access.wrong_type"));
+
+        // Proporcionar una estructura de datos válida
+        jwt = Jwt.withTokenValue("token")
+                .header("alg", "none")
+                .claim("realm_access", Map.of("wrong_type", List.of("admin")))
+                .build();
+
+        // Act
+        Collection<GrantedAuthority> authorities = converter.convert(jwt);
+
+        // Assert
+        assertEquals(1, authorities.size());
+        assertTrue(authorities.stream().anyMatch(auth -> auth.getAuthority().equals("ROLE_admin")));
+    }
 }
