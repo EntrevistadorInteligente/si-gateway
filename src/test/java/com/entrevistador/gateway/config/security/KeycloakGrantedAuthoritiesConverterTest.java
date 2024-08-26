@@ -93,4 +93,60 @@ class KeycloakGrantedAuthoritiesConverterTest {
         assertEquals(1, authorities.size());
         assertTrue(authorities.stream().anyMatch(auth -> auth.getAuthority().equals("ROLE_admin")));
     }
+
+    @Test
+    void extractAuthority_ShouldReturnListWhenPathIsSimpleClaim() {
+        // Arrange
+        when(properties.getRoleClaims()).thenReturn(Set.of("roles"));
+
+        jwt = Jwt.withTokenValue("token")
+                .header("alg", "none")
+                .claim("roles", List.of("user", "admin"))
+                .build();
+
+        // Act
+        Collection<GrantedAuthority> authorities = converter.convert(jwt);
+
+        // Assert
+        assertEquals(2, authorities.size());
+        assertTrue(authorities.stream().anyMatch(auth -> auth.getAuthority().equals("ROLE_user")));
+        assertTrue(authorities.stream().anyMatch(auth -> auth.getAuthority().equals("ROLE_admin")));
+    }
+
+    @Test
+    void extractAuthority_ShouldReturnListWhenPathHasMultipleLevels() {
+        // Arrange
+        when(properties.getRoleClaims()).thenReturn(Set.of("realm_access.roles"));
+
+        jwt = Jwt.withTokenValue("token")
+                .header("alg", "none")
+                .claim("realm_access", Map.of("roles", List.of("user", "admin")))
+                .build();
+
+        // Act
+        Collection<GrantedAuthority> authorities = converter.convert(jwt);
+
+        // Assert
+        assertEquals(2, authorities.size());
+        assertTrue(authorities.stream().anyMatch(auth -> auth.getAuthority().equals("ROLE_user")));
+        assertTrue(authorities.stream().anyMatch(auth -> auth.getAuthority().equals("ROLE_admin")));
+    }
+
+    @Test
+    void extractAuthority_ShouldHandlePartialPathCorrectly() {
+        // Arrange
+        when(properties.getRoleClaims()).thenReturn(Set.of("realm_access.partial.roles"));
+
+        // Configura el JWT con una estructura que tiene una clave válida pero sin el camino esperado
+        jwt = Jwt.withTokenValue("token")
+                .header("alg", "none")
+                .claim("realm_access", Map.of("partial", Map.of()))  // "roles" está ausente
+                .build();
+
+        // Act
+        Collection<GrantedAuthority> authorities = converter.convert(jwt);
+
+        // Assert
+        assertTrue(authorities.isEmpty());
+    }
 }
