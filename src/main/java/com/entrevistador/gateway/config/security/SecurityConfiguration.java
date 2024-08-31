@@ -55,13 +55,6 @@ public class SecurityConfiguration {
                         .permitAll()
                         .anyExchange().authenticated()
                 )
-                .cors(corsSpec -> corsSpec.configurationSource(exchange -> {
-                    var config = new org.springframework.web.cors.CorsConfiguration();
-                    config.setAllowedOrigins(java.util.List.of("*"));
-                    config.setAllowedMethods(java.util.List.of("*"));
-                    config.setAllowedHeaders(java.util.List.of("*"));
-                    return config;
-                }))
                 .build();
     }
 }

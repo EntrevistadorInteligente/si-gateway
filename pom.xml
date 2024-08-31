@@ -21,7 +21,7 @@
 		<spring-cloud.version>2023.0.0</spring-cloud.version>
 		<jar.manifest.packageName>com.entrevistador</jar.manifest.packageName>
 		<org.keycloak.admin-client.version>23.0.3</org.keycloak.admin-client.version>
-
+		<sonar.coverage.exclusions>*/**/jms/**,*/**/beanconfiguration/**,*/**/excepciones/**,*/**/enums/**,*/**/dto/**,*/**/model/**,*/**/properties/**</sonar.coverage.exclusions>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -80,8 +80,14 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-test</artifactId>
+            <version>6.1.3</version>
+            <scope>test</scope>
+        </dependency>
 
-	</dependencies>
+    </dependencies>
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -116,6 +122,26 @@
 					<target>${maven.compiler.target}</target>
 					<compilerArgs>--enable-preview</compilerArgs>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.12</version>
+				<executions>
+					<execution>
+						<id>prepare-agent</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>report</id>
+						<phase>test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

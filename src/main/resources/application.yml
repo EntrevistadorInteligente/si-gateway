@@ -39,7 +39,7 @@ spring:
         corsConfigurations:
           '[/**]':
             allow-credentials: true
-            allowed-origins: ${ORIGINS:http://localhost:${server.port},http://localhost:3000}
+            allowed-origins: ${ORIGINS:http://localhost:${server.port},${FRONT_HOST},http://localhost:3000}
             allowed-headers: '*'
             allowed-methods: '*'
       discovery:
