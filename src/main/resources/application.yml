@@ -111,3 +111,4 @@ logging:
   level:
     org.springframework.security.oauth2: DEBUG
 
+allowed-origins: ${ORIGINS:http://localhost:${server.port},${FRONT_HOST},http://localhost:3000}

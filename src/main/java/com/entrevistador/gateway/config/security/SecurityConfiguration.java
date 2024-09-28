@@ -2,6 +2,8 @@ package com.entrevistador.gateway.config.security;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.lang.NonNull;
@@ -9,7 +11,10 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.web.server.SecurityWebFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
 import reactor.core.publisher.Mono;
+
+import java.util.Arrays;
 
 @Slf4j
 @Configuration
@@ -17,6 +22,10 @@ import reactor.core.publisher.Mono;
 @RequiredArgsConstructor
 public class SecurityConfiguration {
     private final KeycloakLogoutHandler keycloakLogoutHandler;
+
+    @Value("${allowed-origins}")
+    private String allowOrigin;
+
 
     @Bean
     public SecurityWebFilterChain securityFilterChain(@NonNull ServerHttpSecurity httpSecurity) {
@@ -53,8 +62,18 @@ public class SecurityConfiguration {
                                 "/api/administrador-entrevista/v1/muestra/**"
                         )
                         .permitAll()
-                        .anyExchange().authenticated()
+                        .anyExchange()
+                        .authenticated()
+
                 )
+                .cors(corsSpec -> corsSpec.configurationSource(exchange -> {
+                    var config = new CorsConfiguration();
+                    var list = Arrays.stream(allowOrigin.split(",")).toList();
+                    config.setAllowedOrigins(list);
+                    config.setAllowedMethods(java.util.List.of("*"));
+                    config.setAllowedHeaders(java.util.List.of("*"));
+                    return config;
+                }))
                 .build();
     }
 }
